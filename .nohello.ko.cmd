@@ -1,1 +1,0 @@
-cmd_/home/lgmclaughlin/Project_2_lgmclaughlin_rpfoley/nohello.ko := ld -r -m elf_i386 -T /usr/src/linux-source-3.2.0/linux-source-3.2.0/scripts/module-common.lds --build-id  -o /home/lgmclaughlin/Project_2_lgmclaughlin_rpfoley/nohello.ko /home/lgmclaughlin/Project_2_lgmclaughlin_rpfoley/nohello.o /home/lgmclaughlin/Project_2_lgmclaughlin_rpfoley/nohello.mod.o
