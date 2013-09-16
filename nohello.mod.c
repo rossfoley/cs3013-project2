@@ -20,6 +20,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x68d372d2, "module_layout" },
 	{ 0x268cc6a2, "sys_close" },
 	{ 0x50eedeb8, "printk" },
+	{ 0xc5734835, "current_task" },
 	{ 0x829ff995, "pv_cpu_ops" },
 	{ 0xb4390f9a, "mcount" },
 };
@@ -30,4 +31,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "DC0A972B0D1AB3BF3F32254");
+MODULE_INFO(srcversion, "852B743EC8D34DD1DD83911");

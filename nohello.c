@@ -6,10 +6,22 @@
 unsigned long **sys_call_table;
 
 asmlinkage long (*ref_sys_cs3013_syscall1)(void);
+asmlinkage long (*ref_sys_open)(const char *filename, const int mode, const int mask);
+asmlinkage long (*ref_sys_close)(unsigned int fd);
 
 asmlinkage long new_sys_cs3013_syscall1(void) {
     printk(KERN_INFO "\"'Hello world?!' More like 'Goodbye, world!' EXTERMINATE!\" -- Dalek");
     return 0;
+}
+
+asmlinkage long new_sys_open(const char *filename, const int mode, const int mask) {
+    printk(KERN_INFO "User %i is opening file: %s", current_uid(), filename);
+    return ref_sys_open(filename, mode, mask); // Call to saved pointer of old open
+}
+
+asmlinkage long new_sys_close(unsigned int fd) {
+    printk(KERN_INFO "User %i is closing file descriptor: %d", current_uid(), fd);
+    return ref_sys_close(fd); // Call to saved pointer of old close
 }
 
 static unsigned long **find_sys_call_table(void) {
@@ -64,10 +76,15 @@ static int __init interceptor_start(void) {
 
     /* Store a copy of all the existing functions */
     ref_sys_cs3013_syscall1 = (void *)sys_call_table[__NR_cs3013_syscall1];
+    ref_sys_open = (void*)sys_call_table[__NR_open];
+    ref_sys_close = (void*)sys_call_table[__NR_close];
 
     /* Replace the existing system calls */
     disable_page_protection();
     sys_call_table[__NR_cs3013_syscall1] = (unsigned long *)new_sys_cs3013_syscall1;
+    sys_call_table[__NR_open] = (unsigned long *)new_sys_open;
+    sys_call_table[__NR_close] = (unsigned long *)new_sys_close;
+
     enable_page_protection();
 
     /* And indicate the load was successful */
@@ -84,6 +101,9 @@ static void __exit interceptor_end(void) {
     /* Revert all system calls to what they were before we began. */
     disable_page_protection();
     sys_call_table[__NR_cs3013_syscall1] = (unsigned long *)ref_sys_cs3013_syscall1;
+    sys_call_table[__NR_open] = (unsigned long *)ref_sys_open;
+    sys_call_table[__NR_close] = (unsigned long *)ref_sys_close;
+
     enable_page_protection();
 
     printk(KERN_INFO "Unloaded interceptor!");
