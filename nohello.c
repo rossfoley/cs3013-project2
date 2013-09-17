@@ -15,12 +15,16 @@ asmlinkage long new_sys_cs3013_syscall1(void) {
 }
 
 asmlinkage long new_sys_open(const char *filename, const int mode, const int mask) {
-    printk(KERN_INFO "User %i is opening file: %s", current_uid(), filename);
+    if (current_uid() >= 1000) {
+        printk(KERN_INFO "User %i is opening file: %s", current_uid(), filename);
+    }
     return ref_sys_open(filename, mode, mask); // Call to saved pointer of old open
 }
 
 asmlinkage long new_sys_close(unsigned int fd) {
-    printk(KERN_INFO "User %i is closing file descriptor: %d", current_uid(), fd);
+    if (current_uid() >= 1000) {
+        printk(KERN_INFO "User %i is closing file descriptor: %d", current_uid(), fd);
+    }
     return ref_sys_close(fd); // Call to saved pointer of old close
 }
 

@@ -1,0 +1,6 @@
+[166617.421109] User 1000 is closing file descriptor: 3
+[166617.421339] User 1000 is opening file: /etc/ld.so.cache
+[166617.421346] User 1000 is closing file descriptor: 3
+[166617.421356] User 1000 is opening file: /lib/i386-linux-gnu/libc.so.6
+[166617.421380] User 1000 is closing file descriptor: 3
+[166617.421472] "'Hello world?!' More like 'Goodbye, world!' EXTERMINATE!" -- Dalek

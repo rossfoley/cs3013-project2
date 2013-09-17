@@ -1,0 +1,15 @@
+Sep 16 18:50:02 ubuntu kernel: [166445.009005] User 1000 is closing file descriptor: 9
+Sep 16 18:50:03 ubuntu kernel: [166445.010213] User 1000 is closing file descriptor: 32
+Sep 16 18:50:03 ubuntu kernel: [166446.128188] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.128195] User 1000 is closing file descriptor: 4
+Sep 16 18:50:03 ubuntu kernel: [166446.128371] User 1000 is closing file descriptor: 4
+Sep 16 18:50:03 ubuntu kernel: [166446.128384] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.128976] User 1000 is opening file: /etc/ld.so.cache
+Sep 16 18:50:03 ubuntu kernel: [166446.129005] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.129044] User 1000 is opening file: /lib/i386-linux-gnu/libc.so.6
+Sep 16 18:50:03 ubuntu kernel: [166446.129146] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.129642] User 1000 is opening file: /usr/lib/locale/locale-archive
+Sep 16 18:50:03 ubuntu kernel: [166446.129686] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.129757] User 1000 is opening file: /var/log/syslog
+Sep 16 18:50:03 ubuntu kernel: [166446.129892] User 1000 is closing file descriptor: 3
+Sep 16 18:50:03 ubuntu kernel: [166446.129917] User 1000 is closing file descriptor: 1
