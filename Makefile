@@ -1,4 +1,4 @@
-obj-m := nohello.o
+obj-m := phase2.o
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
 
