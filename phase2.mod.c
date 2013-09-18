@@ -18,8 +18,11 @@ static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
 	{ 0x68d372d2, "module_layout" },
-	{ 0x268cc6a2, "sys_close" },
 	{ 0x50eedeb8, "printk" },
+	{ 0x268cc6a2, "sys_close" },
+	{ 0x2f287f0d, "copy_to_user" },
+	{ 0x7f24de73, "jiffies_to_usecs" },
+	{ 0xc5734835, "current_task" },
 	{ 0x829ff995, "pv_cpu_ops" },
 	{ 0xb4390f9a, "mcount" },
 };
@@ -30,4 +33,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "1B8587695B00E2F9615028F");
+MODULE_INFO(srcversion, "31CD13EEDF3C41CDDC1BAA0");

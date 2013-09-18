@@ -12,10 +12,38 @@
 
 unsigned long **sys_call_table;
 
-asmlinkage long (*ref_sys_cs3013_syscall2)(void);
+struct processinfo {
+    long state; // Done
+    pid_t pid; // Done
+    pid_t parent_pid;
+    pid_t youngest_child;
+    pid_t younger_sibling;
+    pid_t older_sibling;
+    uid_t uid; // Done
+    long long start_time; // Done
+    long long user_time; // Done
+    long long sys_time; // Done
+    long long cutime;
+    long long cstime;
+}; //struct processinfo
 
-asmlinkage long new_sys_cs3013_syscall2(void) {
-    printk(KERN_INFO "\"'Hello world?!' More like 'Goodbye, world!' EXTERMINATE!\" -- Dalek");
+
+asmlinkage long (*ref_sys_cs3013_syscall2)(struct processinfo *userinfo);
+
+asmlinkage long new_sys_cs3013_syscall2(struct processinfo *userinfo) {
+    struct processinfo info;
+
+    info.pid = current->pid;
+    info.uid = current_uid();
+    info.state = current->state;
+    info.user_time = cputime_to_usecs(current->utime);
+    info.sys_time = cputime_to_usecs(current->stime);
+    info.start_time = timespec_to_ns(&current->start_time);
+
+    if (copy_to_user(userinfo, &info, sizeof info)) {
+        return EFAULT;
+    }
+
     return 0;
 }
 

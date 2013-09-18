@@ -5,7 +5,7 @@ youngest_child
 younger_sibling
 older_sibling
 uid: current_uid()
-start_time: either task_struct->start_time (timespec)
+start_time: task_struct->start_time (timespec)
 user_time: task_struct->utime (cputime_t) (Needs to be in microseconds)
 sys_time: task_struct->stime (cputime_t) (Needs to be in microseconds)
 cutime: Figure out from the children
