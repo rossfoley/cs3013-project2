@@ -15,15 +15,15 @@ struct processinfo {
     long state; // Done
     pid_t pid; // Done
     pid_t parent_pid; // Done
-    pid_t youngest_child;
+    pid_t youngest_child; // Done
     pid_t younger_sibling;
     pid_t older_sibling;
     uid_t uid; // Done
     long long start_time; // Done
     long long user_time; // Done
     long long sys_time; // Done
-    long long cutime;
-    long long cstime;
+    long long cutime; // Done
+    long long cstime; // Done
 }; // struct processinfo
 
 long testCall2 (struct processinfo *info) {
