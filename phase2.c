@@ -15,7 +15,7 @@ unsigned long **sys_call_table;
 struct processinfo {
     long state; // Done
     pid_t pid; // Done
-    pid_t parent_pid;
+    pid_t parent_pid; // Done
     pid_t youngest_child;
     pid_t younger_sibling;
     pid_t older_sibling;
@@ -32,6 +32,20 @@ asmlinkage long (*ref_sys_cs3013_syscall2)(struct processinfo *userinfo);
 
 asmlinkage long new_sys_cs3013_syscall2(struct processinfo *userinfo) {
     struct processinfo info;
+    struct list_head *list;
+    struct task_struct *child;
+    pid_t youngestChild = 0;
+    long long cutime = 0, cstime = 0;
+    struct task_struct* olderSibling = list_entry(current->sibling.prev, struct task_struct, sibling);
+    
+    list_for_each(list, &current->children) {
+        child = list_entry(list, struct task_struct, sibling);
+        cutime += cputime_to_usecs(child->utime);
+        cstime += cputime_to_usecs(child->stime);
+        if (child->pid > youngestChild) {
+            youngestChild = child->pid;
+        }
+    }
 
     info.pid = current->pid;
     info.uid = current_uid();
@@ -39,6 +53,11 @@ asmlinkage long new_sys_cs3013_syscall2(struct processinfo *userinfo) {
     info.user_time = cputime_to_usecs(current->utime);
     info.sys_time = cputime_to_usecs(current->stime);
     info.start_time = timespec_to_ns(&current->start_time);
+    info.parent_pid = current->parent->pid;
+    info.older_sibling = olderSibling->pid;
+    info.youngest_child = youngestChild;
+    info.cutime = cutime;
+    info.cstime = cstime;
 
     if (copy_to_user(userinfo, &info, sizeof info)) {
         return EFAULT;
